@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CarController : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform rearLeftWheelTransform;
     [SerializeField] private Transform rearRightWheelTransform;
 
+    [SerializeField] private int HEALTH = 100;
+
+    private TextMeshPro healthBar;
+    [SerializeField] private GameObject text3d;
+
 
 
     private UnityEngine.KeyCode FORWARD;
@@ -40,6 +46,7 @@ public class CarController : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        healthBar = text3d.GetComponent<TextMeshPro>();
         
  
       if (playerNumber == 1){
@@ -56,9 +63,29 @@ public class CarController : MonoBehaviour
       }
     }
 
+    private void OnCollisionEnter(Collision other) {
+        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
+        // print("COLLISION");
+        // print(other.gameObject.name);
+        // print(otherRB.velocity.magnitude);
+        // HEALTH = HEALTH - 1;
+        
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
+        print("from "+ $"{playerNumber}" + $"{other.gameObject.name}");
+        if (other.gameObject.name == "FrontCollider"){
+            HEALTH = HEALTH - 10;
+        }
+        // print(otherRB.velocity.magnitude);
+        // HEALTH = HEALTH - 1;
+        
+    }
+
     private void FixedUpdate()
     {
-        print(rb.velocity.magnitude);
+        healthBar.text = $"{HEALTH}";
         GetInput();
         HandleMotor();
         HandleSteering();
@@ -69,6 +96,7 @@ public class CarController : MonoBehaviour
 
     private void GetInput()
     {
+        
         float forwardComponent = 0;
         float backwardComponent = 0;
         float rightComponent = 0;
@@ -92,6 +120,7 @@ public class CarController : MonoBehaviour
 
         if (Input.GetKey(FORWARD)){
             forwardComponent = 1;
+            // print(rb.velocity.magnitude);
         }
         else {
             forwardComponent = 0;
@@ -104,6 +133,13 @@ public class CarController : MonoBehaviour
         }
 
         verticalInput = forwardComponent - backwardComponent;
+
+        if (rb.velocity.magnitude > 5 && backwardComponent == 1){
+            isBreaking = true;
+        }
+        else{
+            isBreaking = false;
+        }
 
 
         // isBreaking = Input.GetKey(BREAK);
