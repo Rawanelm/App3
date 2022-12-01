@@ -30,10 +30,12 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform rearLeftWheelTransform;
     [SerializeField] private Transform rearRightWheelTransform;
 
-    [SerializeField] private int HEALTH = 100;
+    [SerializeField] public int HEALTH = 100;
 
     private TextMeshPro healthBar;
-    [SerializeField] private GameObject text3d;
+    [SerializeField] private GameObject healthBarGameObject;
+
+    [SerializeField] private Camera cameraComponent;
 
 
 
@@ -46,7 +48,7 @@ public class CarController : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        healthBar = text3d.GetComponent<TextMeshPro>();
+        healthBar = healthBarGameObject.GetComponent<TextMeshPro>();
         
  
       if (playerNumber == 1){
@@ -54,32 +56,34 @@ public class CarController : MonoBehaviour
         RIGHT = KeyCode.D;
         LEFT = KeyCode.A;
         BACK = KeyCode.S;
+
+        cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
       }
       else if (playerNumber == 2){
         FORWARD = KeyCode.UpArrow;
         RIGHT = KeyCode.RightArrow;
         LEFT = KeyCode.LeftArrow;
         BACK = KeyCode.DownArrow;
+
+        cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+        cameraComponent.GetComponent<AudioListener>().enabled = false ;
       }
     }
 
+    void screenSettings(){
+
+    }
+
     private void OnCollisionEnter(Collision other) {
-        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
-        // print("COLLISION");
-        // print(other.gameObject.name);
-        // print(otherRB.velocity.magnitude);
-        // HEALTH = HEALTH - 1;
-        
+    
     }
 
     private void OnTriggerEnter(Collider other) {
-        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
         print("from "+ $"{playerNumber}" + $"{other.gameObject.name}");
         if (other.gameObject.name == "FrontCollider"){
-            HEALTH = HEALTH - 10;
+            HEALTH = HEALTH - 50;
         }
-        // print(otherRB.velocity.magnitude);
-        // HEALTH = HEALTH - 1;
+
         
     }
 
@@ -90,7 +94,6 @@ public class CarController : MonoBehaviour
         HandleMotor();
         HandleSteering();
         UpdateWheels();
-
     }
 
 
@@ -120,7 +123,6 @@ public class CarController : MonoBehaviour
 
         if (Input.GetKey(FORWARD)){
             forwardComponent = 1;
-            // print(rb.velocity.magnitude);
         }
         else {
             forwardComponent = 0;
@@ -140,9 +142,6 @@ public class CarController : MonoBehaviour
         else{
             isBreaking = false;
         }
-
-
-        // isBreaking = Input.GetKey(BREAK);
     }
 
     private void HandleMotor()
@@ -181,8 +180,8 @@ public class CarController : MonoBehaviour
     private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
     {
         Vector3 pos;
-        Quaternion rot
-;       wheelCollider.GetWorldPose(out pos, out rot);
+        Quaternion rot;       
+        wheelCollider.GetWorldPose(out pos, out rot);
         wheelTransform.rotation = rot;
         wheelTransform.position = pos;
     }
