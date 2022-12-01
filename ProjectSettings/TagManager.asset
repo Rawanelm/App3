@@ -6,6 +6,9 @@ TagManager:
   tags:
   - player1
   - player2
+  - shootPickUp
+  - ShieldPickUp
+  - ThrowPickUp
   layers:
   - Default
   - TransparentFX

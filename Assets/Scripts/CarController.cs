@@ -15,6 +15,10 @@ public class CarController : MonoBehaviour
     private float currentbreakForce;
     private bool isBreaking;
 
+    private bool shieldActive = false;
+    private bool shootActive = false;
+    private bool throwActive = false;
+
     [SerializeField] private float playerNumber = 1;
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
@@ -80,8 +84,37 @@ public class CarController : MonoBehaviour
         }
         // print(otherRB.velocity.magnitude);
         // HEALTH = HEALTH - 1;
-        
+
+        //activates pickups based on tag 
+        if (other.gameObject.CompareTag("ShieldPickUp"))
+        {
+            other.gameObject.SetActive(false); //deavtivates the cube
+
+            //activate the shield
+            shieldActive = true;
+
+            //activate shield animation
+
+        }
+
+        if (other.gameObject.CompareTag("shootPickUp"))
+        {
+            other.gameObject.SetActive(false); //deactivate cube
+
+            //activate gun
+            shootActive = true;
+        }
+
+        if (other.gameObject.CompareTag("ThrowPickUp"))
+        {
+            other.gameObject.SetActive(false); //deactivate cube
+
+            //activate throw object
+            throwActive = true;
+        }
+
     }
+
 
     private void FixedUpdate()
     {
