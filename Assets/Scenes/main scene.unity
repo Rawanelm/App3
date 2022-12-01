@@ -682,8 +682,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4218194318397169023, guid: b04650df16375f14aa289bd6294551a7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8317642971624830525, guid: b04650df16375f14aa289bd6294551a7, type: 3}
       propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 8317642971624830525, guid: b04650df16375f14aa289bd6294551a7, type: 3}
+      propertyPath: m_TagString
       value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 8657577210351758471, guid: b04650df16375f14aa289bd6294551a7, type: 3}

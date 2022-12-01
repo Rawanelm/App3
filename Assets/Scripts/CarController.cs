@@ -77,41 +77,81 @@ public class CarController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
-        print("from "+ $"{playerNumber}" + $"{other.gameObject.name}");
-        if (other.gameObject.name == "FrontCollider"){
-            HEALTH = HEALTH - 10;
-        }
-        // print(otherRB.velocity.magnitude);
-        // HEALTH = HEALTH - 1;
 
-        //activates pickups based on tag 
-        if (other.gameObject.CompareTag("ShieldPickUp"))
+
+        //checks for shield
+        if (shieldActive) {
+            //do not decrease health index
+            //do not pick up anything else
+        }
+        else if(shootActive || throwActive) //check if any weapons are already active
         {
-            other.gameObject.SetActive(false); //deavtivates the cube
-
-            //activate the shield
-            shieldActive = true;
-
-            //activate shield animation
-
+            //do not pick anything
+            //RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
+            print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
+            if (other.gameObject.name == "FrontCollider")
+            {
+                HEALTH = HEALTH - 10;
+            }
+            // print(otherRB.velocity.magnitude);
+            // HEALTH = HEALTH - 1;
         }
-
-        if (other.gameObject.CompareTag("shootPickUp"))
+        else if (!shootActive && !throwActive && !shieldActive)
         {
-            other.gameObject.SetActive(false); //deactivate cube
 
-            //activate gun
-            shootActive = true;
+            // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
+            print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
+            if (other.gameObject.name == "FrontCollider")
+            {
+                HEALTH = HEALTH - 10;
+            }
+            // print(otherRB.velocity.magnitude);
+            // HEALTH = HEALTH - 1;
+
+            //activates pickups based on tag 
+            if (other.gameObject.CompareTag("ShieldPickUp"))
+            {
+                other.gameObject.SetActive(false); //deavtivates the cube
+
+                //activate the shield
+                shieldActive = true;
+
+                //deactivate after 3 seconds
+                StartCoroutine(PickupActive());
+            }
+
+            if (other.gameObject.CompareTag("shootPickUp"))
+            {
+                other.gameObject.SetActive(false); //deactivate cube
+
+                //activate gun
+                shootActive = true;
+
+                //deactivate after 3 seconds
+                StartCoroutine(PickupActive());
+            }
+
+            if (other.gameObject.CompareTag("ThrowPickUp"))
+            {
+                other.gameObject.SetActive(false); //deactivate cube
+
+                //activate throw object
+                throwActive = true;
+
+                //deactivate after 3 seconds
+                StartCoroutine(PickupActive());
+            }
         }
+    }
 
-        if (other.gameObject.CompareTag("ThrowPickUp"))
-        {
-            other.gameObject.SetActive(false); //deactivate cube
+    IEnumerator PickupActive()
+    {
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(3);
 
-            //activate throw object
-            throwActive = true;
-        }
+        shootActive = false;
+        throwActive = false;
+        shieldActive = false;
 
     }
 
