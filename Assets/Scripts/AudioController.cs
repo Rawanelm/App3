@@ -8,11 +8,12 @@ public class AudioController : MonoBehaviour
     private AudioSource audioSource;
     private GameObject[] go;
     private bool NotFirst = false;
+    private float musicVolume = 0.5f;
+    public Slider m_slider;
 
-    void Awake()
+    void Start()
     {
         go = GameObject.FindGameObjectsWithTag("MenuMusic");
-        //allAudioSources = FindObjectsOfType(AudioSource);
 
         foreach (GameObject thing in go)
         {
@@ -40,5 +41,26 @@ public class AudioController : MonoBehaviour
     public void StopMusic()
     {
         audioSource.Stop();
+    }
+
+    public void SetGameVolume(float volume)
+    {
+        AudioListener.volume = volume;
+
+        PlayerPrefs.SetFloat("Volume", volume);
+    }
+
+    void Update()
+    {
+        audioSource.volume = musicVolume;
+        if (m_slider != null && PlayerPrefs.HasKey("Volume"))
+        {
+            float wantedVolume = PlayerPrefs.GetFloat("Volume", 1f);
+            m_slider.value = wantedVolume;
+            AudioListener.volume = wantedVolume;
+
+            m_slider.onValueChanged.AddListener(delegate { SetGameVolume(m_slider.value); });
+
+        }
     }
 }
