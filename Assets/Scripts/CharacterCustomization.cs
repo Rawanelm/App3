@@ -18,7 +18,7 @@ public class CharacterCustomization : MonoBehaviour
     void Update()
     {
         if (playerOneName.GetComponent<TMP_InputField>().text.Length > 0 && playerTwoName.GetComponent<TMP_InputField>().text.Length > 0)
-        {
+        { 
             fieldCheck = true;
         }
 
