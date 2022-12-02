@@ -32,7 +32,7 @@ public class SFXToggle : MonoBehaviour
     {
         if (soundToggle.isOn == true)
         {
-            SetSFXVolume(0.5f);
+            SetSFXVolume(1.0f);
             SoundToggleOn();
         }
         else

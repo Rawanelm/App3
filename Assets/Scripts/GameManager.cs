@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public string gameOverScene;
 
-    public float timeLeft = 120;
+    public float timeLeft = 15;
     private int timeLeftInt;
     public TextMeshProUGUI timerText;
 
@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        PlayerPrefs.SetFloat("Car1Score", car1Script.score);
+        PlayerPrefs.SetFloat("Car2Score", car2Script.score);
         GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().StopMusic();
         SceneManager.LoadScene(gameOverScene);
     }
