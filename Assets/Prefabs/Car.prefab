@@ -480,6 +480,9 @@ MonoBehaviour:
   frontRightWheeTransform: {fileID: 4354749975000257501}
   rearLeftWheelTransform: {fileID: 5675339917978311361}
   rearRightWheelTransform: {fileID: 3540949378516350434}
+  shieldPickupSound: {fileID: 8300000, guid: 5986f330020352f4cb5b2ab718fa35fc, type: 3}
+  gunPickupSound: {fileID: 8300000, guid: be2840cf7e4c00748853fedece5ff83c, type: 3}
+  throwPickupSound: {fileID: 8300000, guid: ce9ab71ae50e88945b8501047aa1e79f, type: 3}
   health: 100
   healthTextGameObject: {fileID: 6207567939804846692}
   cameraComponent: {fileID: 632106310928461306}
