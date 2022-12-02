@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4393479550702194701}
-  - component: {fileID: 5213236902238463218}
+  - component: {fileID: 8557184541765425086}
   - component: {fileID: 1311492598593421056}
+  - component: {fileID: 3974914654441944419}
   m_Layer: 5
   m_Name: MusicToggle
   m_TagString: Untagged
@@ -40,7 +41,7 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: -200}
   m_SizeDelta: {x: 200, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5213236902238463218
+--- !u!114 &8557184541765425086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,6 +101,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &3974914654441944419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146208888758989206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0598a8b704adba540ba5bc52860fd1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &562999375464484691
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &916836363921299696
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1431,7 +1444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6484980257560992399}
-  - component: {fileID: 2202251696370781877}
+  - component: {fileID: 45762045157313404}
   - component: {fileID: 3693264673115634283}
   m_Layer: 5
   m_Name: SoundToggle
@@ -1462,7 +1475,7 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: -200}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2202251696370781877
+--- !u!114 &45762045157313404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1471,7 +1484,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5643504092982241854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0598a8b704adba540ba5bc52860fd1b6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0ce469213553de4d84d07b63679c5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3693264673115634283

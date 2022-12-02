@@ -174,7 +174,7 @@ public class CarController : MonoBehaviour
             //activates pickups based on tag 
             if (other.gameObject.CompareTag("ShieldPickUp"))
             {
-                AudioSource.PlayClipAtPoint(shieldPickupSound, frontLeftWheelTransform.position);
+                AudioSource.PlayClipAtPoint(shieldPickupSound, transform.position, 1f);
 
                 other.gameObject.SetActive(false); //deavtivates the cube
 
@@ -187,7 +187,7 @@ public class CarController : MonoBehaviour
 
             if (other.gameObject.CompareTag("gunPickUp"))
             {
-                AudioSource.PlayClipAtPoint(gunPickupSound, frontLeftWheelTransform.position);
+                AudioSource.PlayClipAtPoint(gunPickupSound, transform.position, 1f);
 
                 other.gameObject.SetActive(false); //deactivate the pickup icon
 
@@ -200,7 +200,7 @@ public class CarController : MonoBehaviour
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
             {
-                AudioSource.PlayClipAtPoint(throwPickupSound, frontLeftWheelTransform.position);
+                //AudioSource.PlayOneShot(throwPickupSound, 1f);
 
                 other.gameObject.SetActive(false); //deactivate cube
 
