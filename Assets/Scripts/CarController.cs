@@ -15,10 +15,6 @@ public class CarController : MonoBehaviour
     private float currentbreakForce;
     private bool isBreaking;
 
-    private bool shieldActive = false;
-    private bool shootActive = false;
-    private bool throwActive = false;
-
     [SerializeField] private float playerNumber = 1;
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
@@ -47,6 +43,9 @@ public class CarController : MonoBehaviour
     // camera stuff
     [SerializeField] private Camera cameraComponent;
 
+    //score stuff
+    public int score = 0;
+
     // hats
     private string hatName;
     private GameObject hat;
@@ -61,6 +60,17 @@ public class CarController : MonoBehaviour
     private GameObject gunObject;
     private GunController gunScript;
     public GameObject gunPoint;
+
+    //booleans to check if any pickups are active
+    private bool shieldActive = false;
+    private bool shootActive = false;
+    private bool throwActive = false;
+
+    //shield stuff
+    private string shieldGameObjectName = "Shield";
+    private GameObject shield;
+    private ShieldController shieldScript;
+    public GameObject shieldPoint;
 
 
     // rigid body
@@ -129,16 +139,11 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
 
-
         //checks for shield
         if (shieldActive) {
             //do not decrease health index
             //do not pick up anything else
         }
-        if (other.gameObject.tag == "gunPickUp"){
-            other.gameObject.SetActive(false);
-            EquipGun();
-        }  
         else if(shootActive || throwActive) //check if any weapons are already active
         {
             //do not pick anything
@@ -170,20 +175,24 @@ public class CarController : MonoBehaviour
 
                 //activate the shield
                 shieldActive = true;
+                EquipShield();
 
                 //deactivate after 3 seconds
                 StartCoroutine(PickupActive());
+                RemoveShield();
             }
 
-            if (other.gameObject.CompareTag("shootPickUp"))
+            if (other.gameObject.CompareTag("gunPickUp"))
             {
-                other.gameObject.SetActive(false); //deactivate cube
+                other.gameObject.SetActive(false); //deactivate the pickup icon
 
                 //activate gun
                 shootActive = true;
+                EquipGun(); //equip gun
 
                 //deactivate after 3 seconds
                 StartCoroutine(PickupActive());
+                removeGun(); //remove gun
             }
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
@@ -199,9 +208,10 @@ public class CarController : MonoBehaviour
         }
     }
 
+    //resets booleans after three seconds
     IEnumerator PickupActive()
     {
-        //yield on a new YieldInstruction that waits for 5 seconds.
+        //yield on a new YieldInstruction that waits for 3 seconds.
         yield return new WaitForSeconds(3);
 
         shootActive = false;
@@ -268,6 +278,25 @@ public class CarController : MonoBehaviour
         gunIsEquipped = true;
     }
 
+    private void removeGun()
+    {
+        Destroy(gunObject);
+    }
+
+    //shield
+    private void EquipShield()
+    {
+        shield = Instantiate(Resources.Load(shieldGameObjectName, typeof(GameObject))) as GameObject;
+        shield.transform.position = shieldPoint.transform.position;
+        shield.transform.rotation = shieldPoint.transform.rotation;
+        shieldScript = shield.GetComponent<ShieldController>();
+        shield.transform.parent = transform;
+    }
+
+    private void RemoveShield()
+    {
+        Destroy(shield);
+    }
 
 
     // customization
