@@ -200,7 +200,7 @@ public class CarController : MonoBehaviour
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
             {
-                //AudioSource.PlayOneShot(throwPickupSound, 1f);
+                AudioSource.PlayClipAtPoint(throwPickupSound, transform.position, 1f);
 
                 other.gameObject.SetActive(false); //deactivate cube
 
