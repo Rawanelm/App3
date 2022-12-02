@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7403778753538433594}
   - component: {fileID: 6150099190184057815}
   - component: {fileID: 5070312039350887375}
+  - component: {fileID: 3383809536938396780}
   m_Layer: 0
   m_Name: gunPickUp
   m_TagString: gunPickUp
@@ -97,3 +98,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.23086005, y: 1.1732898, z: 4.895917}
   m_Center: {x: -0.005947288, y: 0.20827577, z: 0.031448126}
+--- !u!95 &3383809536938396780
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492231091889629313}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b5127403f85f88448c9edc60dce2659, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
