@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  motorForce: 5000
+  motorForce: 2000
   breakForce: 10000
   maxSteerAngle: 30
   frontLeftWheelCollider: {fileID: 1509984064899788745}
@@ -481,10 +481,11 @@ MonoBehaviour:
   frontRightWheeTransform: {fileID: 4354749975000257501}
   rearLeftWheelTransform: {fileID: 5675339917978311361}
   rearRightWheelTransform: {fileID: 3540949378516350434}
-  HEALTH: 100
-  healthBarGameObject: {fileID: 6207567939804846692}
+  health: 100
+  healthTextGameObject: {fileID: 6207567939804846692}
   cameraComponent: {fileID: 632106310928461306}
   score: 0
+  scoreTextGameObject: {fileID: 4685352802078355790}
   hatPoint: {fileID: 186922356082526312}
   gunPoint: {fileID: 1481599286135946614}
   shieldPoint: {fileID: 1816442470950753543}
@@ -824,7 +825,6 @@ GameObject:
   - component: {fileID: 1955708659095127726}
   - component: {fileID: 671093816394542240}
   - component: {fileID: 189855382051292858}
-  - component: {fileID: 6366530800189721023}
   m_Layer: 0
   m_Name: ScoreText
   m_TagString: Untagged
@@ -986,18 +986,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 671093816394542240}
   m_maskType: 0
---- !u!114 &6366530800189721023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4685352802078355790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3f0fe7632a0464799b2489ee00a541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4773821711927962296
 GameObject:
   m_ObjectHideFlags: 0
