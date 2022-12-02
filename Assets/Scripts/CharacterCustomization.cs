@@ -12,6 +12,8 @@ public class CharacterCustomization : MonoBehaviour
     public bool fieldCheck = false;
     public Button continueButton;
     public string gameScene;
+    public string P1name = "";
+    public string P2name = "";
 
     void Update()
     {
@@ -28,6 +30,11 @@ public class CharacterCustomization : MonoBehaviour
 
     public void BeginGame()
     {
+        P1name = playerOneName.GetComponent<TMP_InputField>().text;
+        PlayerPrefs.SetString("playerName", P1name);
+        P2name = playerTwoName.GetComponent<TMP_InputField>().text;
+        PlayerPrefs.SetString("playerName", P2name);
+
         GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
         SceneManager.LoadScene(gameScene);
     }
