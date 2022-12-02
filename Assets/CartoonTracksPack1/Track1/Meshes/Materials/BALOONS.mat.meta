@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UIElements/MIMG/Demo/Animtions/Human.anim.meta
+guid: 5c40a9722d2b53e4fbb50ab044f41685
+=======
 guid: 00401932eb16a164d8c8cf5024c81370
+>>>>>>> main:Assets/CartoonTracksPack1/Track1/Meshes/Materials/BALOONS.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 7400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

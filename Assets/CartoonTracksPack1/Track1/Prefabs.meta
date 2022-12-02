@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UIElements/MIMG/Prefabs.meta
+guid: acb98406f18a4124cb8cb93440fd8545
+=======
 guid: fe29feda834ce014083db71ff51e59ea
+>>>>>>> main:Assets/CartoonTracksPack1/Track1/Prefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

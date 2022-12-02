@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/AudioController.cs.meta
+guid: a12615326d8c43641a2a8332423749da
+=======
+guid: 054618853b33949b2b6633e3c1a45f40
+>>>>>>> main:Assets/Scripts/GameManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UIElements/Buttons/PNG/20bttn-midl.asset.meta
+guid: dd36c6decfad47d45849bbd7b8299927
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+=======
 guid: 7f35231755fa8124096e33e80144306f
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 13400000
+>>>>>>> main:Assets/CartoonTracksPack1/Track1/Physics Materials/Cone.physicMaterial.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

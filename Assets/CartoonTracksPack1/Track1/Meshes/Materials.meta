@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UIElements.meta
+guid: c4166819479f6334dad0259a459c588f
+=======
 guid: e00bf6d974b0f5a4e893183a1a64612b
+>>>>>>> main:Assets/CartoonTracksPack1/Track1/Meshes/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

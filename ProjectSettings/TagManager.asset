@@ -10,6 +10,9 @@ TagManager:
   - ShieldPickUp
   - ThrowPickUp
   - Shield
+  - MenuMusic
+  - PauseMusic
+  - GameMusic
   layers:
   - Default
   - TransparentFX

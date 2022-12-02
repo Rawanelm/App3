@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UIElements/MIMG/Demo/Animtions/Human_Attack.anim.meta
+guid: 8806556d281b64144b020165c121af94
+=======
 guid: cc78efcdfefbd1946b3cfd8213f5b476
+>>>>>>> main:Assets/CartoonTracksPack1/Track1/Meshes/Materials/BANNERS.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 7400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
