@@ -14,6 +14,10 @@ public class EndGame : MonoBehaviour
     void Start()
     {
         GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().PlayMusic();
+        winner = PlayerPrefs.GetString("P1name");
+        loser = PlayerPrefs.GetString("P2name");
+
+        ShowResults();
     }
 
     public void ReturnToMain()
@@ -25,14 +29,6 @@ public class EndGame : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Quitting");
-    }
-
-    void Update()
-    {
-        winner = PlayerPrefs.GetString("P1name");
-        loser = PlayerPrefs.GetString("P2name");
-
-        ShowResults();
     }
 
     void ShowResults()

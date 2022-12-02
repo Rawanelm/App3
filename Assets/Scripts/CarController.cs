@@ -35,6 +35,10 @@ public class CarController : MonoBehaviour
     private UnityEngine.KeyCode LEFT;
     private UnityEngine.KeyCode BACK;
 
+    public AudioClip shieldPickupSound;
+    public AudioClip gunPickupSound;
+    public AudioClip throwPickupSound;
+
     // health stuff
     [SerializeField] public int health = 100;
     private TextMeshPro healthText;
@@ -170,6 +174,8 @@ public class CarController : MonoBehaviour
             //activates pickups based on tag 
             if (other.gameObject.CompareTag("ShieldPickUp"))
             {
+                AudioSource.PlayClipAtPoint(shieldPickupSound, frontLeftWheelTransform.position);
+
                 other.gameObject.SetActive(false); //deavtivates the cube
 
                 //activate the shield
@@ -181,6 +187,8 @@ public class CarController : MonoBehaviour
 
             if (other.gameObject.CompareTag("gunPickUp"))
             {
+                AudioSource.PlayClipAtPoint(gunPickupSound, frontLeftWheelTransform.position);
+
                 other.gameObject.SetActive(false); //deactivate the pickup icon
 
                 //activate gun
@@ -192,6 +200,8 @@ public class CarController : MonoBehaviour
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
             {
+                AudioSource.PlayClipAtPoint(throwPickupSound, frontLeftWheelTransform.position);
+
                 other.gameObject.SetActive(false); //deactivate cube
 
                 //activate throw object
@@ -200,8 +210,6 @@ public class CarController : MonoBehaviour
             }
         }
     }
-
-
 
     //resets booleans and disables pickup after three seconds
     IEnumerator DisablePickupAfterSeconds(int seconds)

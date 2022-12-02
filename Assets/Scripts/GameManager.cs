@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MonitorCar(car1);
-        MonitorCar(car2);
+        //MonitorCar(car1);
+        //MonitorCar(car2);
     }
 
     void MonitorCar(GameObject car){
