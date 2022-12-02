@@ -36,6 +36,7 @@ public class PauseMenu : MonoBehaviour
     public void ToMain()
     {
         SceneManager.LoadScene(mainMenu);
+        GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().StopMusic();
     }
 
     public void QuitGame()
