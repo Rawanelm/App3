@@ -149,6 +149,17 @@ TerrainCollider:
   m_Enabled: 1
   m_TerrainData: {fileID: 0}
   m_EnableTreeColliders: 1
+--- !u!114 &59126112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1311492598593421056, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+  m_PrefabInstance: {fileID: 1873654775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &531037176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1132,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 632878388}
     m_Modifications:
+    - target: {fileID: 916836363223897937, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 632878389}
+    - target: {fileID: 916836363223897937, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 916836363921299696, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1225,6 +1244,58 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 632878389}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 916836364547497596, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 916836364963454158, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 632878389}
+    - target: {fileID: 916836364963454158, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToMain
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202251696370781877, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: musicToggle
+      value: 
+      objectReference: {fileID: 59126112}
+    - target: {fileID: 2202251696370781877, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: soundToggle
+      value: 
+      objectReference: {fileID: 2121340282}
+    - target: {fileID: 5213236902238463218, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: musicToggle
+      value: 
+      objectReference: {fileID: 59126112}
+    - target: {fileID: 5213236902238463218, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+      propertyPath: soundToggle
+      value: 
+      objectReference: {fileID: 2121340282}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
 --- !u!4 &1885932524 stripped
@@ -1268,6 +1339,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 259541758162778781, guid: cbf79babae678474692ba1856eb21d5f, type: 3}
   m_PrefabInstance: {fileID: 2537519503984457022}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2121340282 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3693264673115634283, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+  m_PrefabInstance: {fileID: 1873654775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2137839364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2834320985844681631, guid: 2953943eb6ab8e24081b12ab3f22a4b3, type: 3}
