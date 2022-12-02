@@ -6,8 +6,8 @@ using TMPro;
 
 public class CarController : MonoBehaviour
 {
-    private const string HORIZONTAL = "Horizontal";
-    private const string VERTICAL = "Vertical";
+
+    // driving controls
 
     private float horizontalInput;
     private float verticalInput;
@@ -30,56 +30,85 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform rearLeftWheelTransform;
     [SerializeField] private Transform rearRightWheelTransform;
 
-    [SerializeField] private int HEALTH = 100;
-
-    private TextMeshPro healthBar;
-    [SerializeField] private GameObject text3d;
-
-
-
     private UnityEngine.KeyCode FORWARD;
     private UnityEngine.KeyCode RIGHT;
     private UnityEngine.KeyCode LEFT;
     private UnityEngine.KeyCode BACK;
 
+    // health stuff
+    [SerializeField] public int HEALTH = 100;
+    private TextMeshPro healthBar;
+    [SerializeField] private GameObject healthBarGameObject;
+
+    // camera stuff
+    [SerializeField] private Camera cameraComponent;
+
+    // hats
+    private string hatName;
+    private GameObject hat;
+    public GameObject hatPoint;
+
+    // rigid body
     Rigidbody rb;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        healthBar = text3d.GetComponent<TextMeshPro>();
+
+        healthBar = healthBarGameObject.GetComponent<TextMeshPro>();
+
+        PlayerSettings();
+
+        WearHat();
         
- 
+        
+    }
+
+    private void OnCollisionEnter(Collision other) {
+    
+    }
+
+    private void WearHat(){
+        if(hatName != ""){
+            hat = Instantiate(Resources.Load(hatName, typeof(GameObject))) as GameObject;
+            hat.transform.position = hatPoint.transform.position;
+            hat.transform.parent = transform;
+
+        }
+    }
+
+    private void PlayerSettings(){
       if (playerNumber == 1){
         FORWARD = KeyCode.W;
         RIGHT = KeyCode.D;
         LEFT = KeyCode.A;
         BACK = KeyCode.S;
+
+        cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+
+        hatName = "MagicianHat";
+        // TODO: uncomment
+        //hatName = PlayerPrefs.GetString("player1hat");
       }
       else if (playerNumber == 2){
         FORWARD = KeyCode.UpArrow;
         RIGHT = KeyCode.RightArrow;
         LEFT = KeyCode.LeftArrow;
         BACK = KeyCode.DownArrow;
+
+        cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+        cameraComponent.GetComponent<AudioListener>().enabled = false ;
+        hatName = "CowboyHat";
+        // TODO: uncomment
+        //hatName = PlayerPrefs.GetString("player2hat");
       }
     }
 
-    private void OnCollisionEnter(Collision other) {
-        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
-        // print("COLLISION");
-        // print(other.gameObject.name);
-        // print(otherRB.velocity.magnitude);
-        // HEALTH = HEALTH - 1;
-        
-    }
-
     private void OnTriggerEnter(Collider other) {
-        // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
         print("from "+ $"{playerNumber}" + $"{other.gameObject.name}");
         if (other.gameObject.name == "FrontCollider"){
-            HEALTH = HEALTH - 10;
+            HEALTH = HEALTH - 50;
         }
-        // print(otherRB.velocity.magnitude);
-        // HEALTH = HEALTH - 1;
+
         
     }
 
@@ -90,13 +119,10 @@ public class CarController : MonoBehaviour
         HandleMotor();
         HandleSteering();
         UpdateWheels();
-
     }
-
 
     private void GetInput()
     {
-        
         float forwardComponent = 0;
         float backwardComponent = 0;
         float rightComponent = 0;
@@ -120,7 +146,6 @@ public class CarController : MonoBehaviour
 
         if (Input.GetKey(FORWARD)){
             forwardComponent = 1;
-            // print(rb.velocity.magnitude);
         }
         else {
             forwardComponent = 0;
@@ -140,9 +165,6 @@ public class CarController : MonoBehaviour
         else{
             isBreaking = false;
         }
-
-
-        // isBreaking = Input.GetKey(BREAK);
     }
 
     private void HandleMotor()
@@ -181,8 +203,8 @@ public class CarController : MonoBehaviour
     private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
     {
         Vector3 pos;
-        Quaternion rot
-;       wheelCollider.GetWorldPose(out pos, out rot);
+        Quaternion rot;       
+        wheelCollider.GetWorldPose(out pos, out rot);
         wheelTransform.rotation = rot;
         wheelTransform.position = pos;
     }
