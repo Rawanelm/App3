@@ -23,23 +23,23 @@ public class GeneratePickup : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy()
+    public void SpawnPickUp()
     {
         int ndx = Random.Range(0, pickUps.Length); //generates random number to choose type of enemy 
         GameObject go = Instantiate<GameObject>(pickUps[ndx]); //instatiates random enemy
 
         // determines the bounds for spawning pickUp
         Vector3 pos = Vector3.zero;
-        float xMin = -177;
-        float xMax = 21;
+        float xMin = -121;
+        float xMax = 51;
 
-        float yMin = 110;
-        float yMax = 163;
+        float zMin = -195;
+        float zMax = -26;
 
         // generates random x and y position
         pos.x = Random.Range(xMin, xMax);
-        pos.y = Random.Range(yMin, yMax);
-        pos.z = 2;
+        pos.z = Random.Range(zMin, zMax);
+        pos.y = 1;
 
         go.transform.position = pos; //spawns the enemy
         totalPickUps++;

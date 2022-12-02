@@ -139,7 +139,6 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
 
-
         //checks for shield
         if (shieldActive) {
             //do not decrease health index
