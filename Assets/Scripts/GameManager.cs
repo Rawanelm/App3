@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log(car1Script.score);
         GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().StopMusic();
         SceneManager.LoadScene(gameOverScene);
     }
