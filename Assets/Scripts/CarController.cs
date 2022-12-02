@@ -134,9 +134,13 @@ public class CarController : MonoBehaviour
 
 
     private void OnCollisionEnter(Collision other) {
-     if (other.gameObject.tag == "bullet")
+
+        if (!shieldActive)
         {
-            health = health - 1;
+            if (other.gameObject.tag == "bullet")
+            {
+                health = health - 1;
+            }
         }
     }
 
