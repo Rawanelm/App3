@@ -6,8 +6,8 @@ using TMPro;
 
 public class CarController : MonoBehaviour
 {
-    private const string HORIZONTAL = "Horizontal";
-    private const string VERTICAL = "Vertical";
+
+    // driving controls
 
     private float horizontalInput;
     private float verticalInput;
@@ -30,27 +30,53 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform rearLeftWheelTransform;
     [SerializeField] private Transform rearRightWheelTransform;
 
-    [SerializeField] public int HEALTH = 100;
-
-    private TextMeshPro healthBar;
-    [SerializeField] private GameObject healthBarGameObject;
-
-    [SerializeField] private Camera cameraComponent;
-
-
-
     private UnityEngine.KeyCode FORWARD;
     private UnityEngine.KeyCode RIGHT;
     private UnityEngine.KeyCode LEFT;
     private UnityEngine.KeyCode BACK;
 
+    // health stuff
+    [SerializeField] public int HEALTH = 100;
+    private TextMeshPro healthBar;
+    [SerializeField] private GameObject healthBarGameObject;
+
+    // camera stuff
+    [SerializeField] private Camera cameraComponent;
+
+    // hats
+    private string hatName;
+    private GameObject hat;
+    public GameObject hatPoint;
+
+    // rigid body
     Rigidbody rb;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+
         healthBar = healthBarGameObject.GetComponent<TextMeshPro>();
+
+        PlayerSettings();
+
+        WearHat();
         
- 
+        
+    }
+
+    private void OnCollisionEnter(Collision other) {
+    
+    }
+
+    private void WearHat(){
+        if(hatName != ""){
+            hat = Instantiate(Resources.Load(hatName, typeof(GameObject))) as GameObject;
+            hat.transform.position = hatPoint.transform.position;
+            hat.transform.parent = transform;
+
+        }
+    }
+
+    private void PlayerSettings(){
       if (playerNumber == 1){
         FORWARD = KeyCode.W;
         RIGHT = KeyCode.D;
@@ -58,6 +84,10 @@ public class CarController : MonoBehaviour
         BACK = KeyCode.S;
 
         cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+
+        hatName = "MagicianHat";
+        // TODO: uncomment
+        //hatName = PlayerPrefs.GetString("player1hat");
       }
       else if (playerNumber == 2){
         FORWARD = KeyCode.UpArrow;
@@ -67,15 +97,10 @@ public class CarController : MonoBehaviour
 
         cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraComponent.GetComponent<AudioListener>().enabled = false ;
+        hatName = "CowboyHat";
+        // TODO: uncomment
+        //hatName = PlayerPrefs.GetString("player2hat");
       }
-    }
-
-    void screenSettings(){
-
-    }
-
-    private void OnCollisionEnter(Collision other) {
-    
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -96,10 +121,8 @@ public class CarController : MonoBehaviour
         UpdateWheels();
     }
 
-
     private void GetInput()
     {
-        
         float forwardComponent = 0;
         float backwardComponent = 0;
         float rightComponent = 0;
