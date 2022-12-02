@@ -6,32 +6,45 @@ public class GeneratePickup : MonoBehaviour
 {
 
     //public GameObject shieldPickUp;
-   // public GameObject throwPickUp;
-    //public GameObject shootPickUp;
+    // public GameObject throwPickUp;
+    //public GameObject gunPickUp;
+
+    private int totalPickUps;
+    private int maxPickups = 30;
+    public GameObject[] pickUps;
+    public float pickupSpawn = 0.5f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //Instantiate(shieldpickUp, new Vector3(3, 1, -4), Quaternion.identity);
-        //Instantiate(shieldpickUp, new Vector3(-4, 1, -4), Quaternion.identity);
-        //Instantiate(shieldpickUp, new Vector3(22, 1, 4), Quaternion.identity);
-        //Instantiate(shieldpickUp, new Vector3(29, 1, 4), Quaternion.identity);
-
-        //Instantiate(throwPickUp, new Vector3(22, 1, -5), Quaternion.identity);
-        //Instantiate(throwPickUp, new Vector3(29, 1, -5), Quaternion.identity);
-        //Instantiate(throwPickUp, new Vector3(4, 1, 4), Quaternion.identity);
-        //Instantiate(throwPickUp, new Vector3(-4, 1, 4), Quaternion.identity);
-
-        //Instantiate(shootPickUp, new Vector3(22, 1, -5), Quaternion.identity);
-        //Instantiate(shootPickUp, new Vector3(29, 1, -5), Quaternion.identity);
-        //Instantiate(shootPickUp, new Vector3(4, 1, 4), Quaternion.identity);
-        //Instantiate(shootPickUp, new Vector3(-4, 1, 4), Quaternion.identity);
-
+        if (totalPickUps < maxPickups)
+        {
+            Invoke("SpawnPickUp", 1f / pickupSpawn);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnPickUp()
     {
-        
+        int ndx = Random.Range(0, pickUps.Length); //generates random number to choose type of enemy 
+        GameObject go = Instantiate<GameObject>(pickUps[ndx]); //instatiates random enemy
+
+        // determines the bounds for spawning pickUp
+        Vector3 pos = Vector3.zero;
+        float xMin = -121;
+        float xMax = 51;
+
+        float zMin = -195;
+        float zMax = -26;
+
+        // generates random x and y position
+        pos.x = Random.Range(xMin, xMax);
+        pos.z = Random.Range(zMin, zMax);
+        pos.y = 1;
+
+        go.transform.position = pos; //spawns the enemy
+        totalPickUps++;
+
+        Invoke("SpawnPickUp", 1f / pickupSpawn); // invokes the enemy spawn method again
     }
+
 }

@@ -15,10 +15,6 @@ public class CarController : MonoBehaviour
     private float currentbreakForce;
     private bool isBreaking;
 
-    private bool shieldActive = false;
-    private bool shootActive = false;
-    private bool throwActive = false;
-
     [SerializeField] private float playerNumber = 1;
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
@@ -40,12 +36,17 @@ public class CarController : MonoBehaviour
     private UnityEngine.KeyCode BACK;
 
     // health stuff
-    [SerializeField] public int HEALTH = 100;
-    private TextMeshPro healthBar;
-    [SerializeField] private GameObject healthBarGameObject;
+    [SerializeField] public int health = 100;
+    private TextMeshPro healthText;
+    [SerializeField] private GameObject healthTextGameObject;
 
     // camera stuff
     [SerializeField] private Camera cameraComponent;
+
+    //score stuff
+    public int score = 0;
+    private TextMeshPro scoreText;
+    [SerializeField] private GameObject scoreTextGameObject;
 
     // hats
     private string hatName;
@@ -56,11 +57,21 @@ public class CarController : MonoBehaviour
     private UnityEngine.KeyCode USE_PICKUP;
 
     // gun
-    private bool gunIsEquipped;
     private string gunGameObjectName = "PickupItems/gun";
     private GameObject gunObject;
     private GunController gunScript;
     public GameObject gunPoint;
+
+    //booleans to check if any pickups are active
+    private bool shieldActive = false;
+    private bool gunActive = false;
+    private bool throwActive = false;
+
+    //shield stuff
+    private string shieldGameObjectName = "Shield";
+    private GameObject shield;
+    private ShieldController shieldScript;
+    public GameObject shieldPoint;
 
 
     // rigid body
@@ -69,7 +80,8 @@ public class CarController : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody>();
 
-        healthBar = healthBarGameObject.GetComponent<TextMeshPro>();
+        healthText = healthTextGameObject.GetComponent<TextMeshPro>();
+        scoreText = scoreTextGameObject.GetComponent<TextMeshPro>();
 
         PlayerSettings();
         WearHat();
@@ -106,7 +118,8 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        healthBar.text = $"{HEALTH}";
+        healthText.text = $"{health}";
+        scoreText.text = $"{score}";
         GetUsePickUpInput();
         GetDrivingInput();
         HandleMotor();
@@ -122,46 +135,34 @@ public class CarController : MonoBehaviour
 
 
     private void GetUsePickUpInput(){
-        if (Input.GetKey(USE_PICKUP) && gunIsEquipped){
+        if (Input.GetKey(USE_PICKUP) && gunActive){
             gunScript.ShootGun();
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-
+        print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
 
         //checks for shield
         if (shieldActive) {
             //do not decrease health index
             //do not pick up anything else
         }
-        if (other.gameObject.tag == "gunPickUp"){
-            other.gameObject.SetActive(false);
-            EquipGun();
-        }  
-        else if(shootActive || throwActive) //check if any weapons are already active
+        else if(gunActive || throwActive) //check if any weapons are already active
         {
             //do not pick anything
-            //RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
-            print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
             if (other.gameObject.name == "FrontCollider")
             {
-                HEALTH = HEALTH - 10;
+                health = health - 100;
             }
-            // print(otherRB.velocity.magnitude);
-            // HEALTH = HEALTH - 1;
         }
-        else if (!shootActive && !throwActive && !shieldActive)
+        else if (!gunActive && !throwActive && !shieldActive)
         {
 
-            // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
-            print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
             if (other.gameObject.name == "FrontCollider")
             {
-                HEALTH = HEALTH - 10;
+                health = health - 100;
             }
-            // print(otherRB.velocity.magnitude);
-            // HEALTH = HEALTH - 1;
 
             //activates pickups based on tag 
             if (other.gameObject.CompareTag("ShieldPickUp"))
@@ -169,21 +170,21 @@ public class CarController : MonoBehaviour
                 other.gameObject.SetActive(false); //deavtivates the cube
 
                 //activate the shield
-                shieldActive = true;
+                EquipShield();
 
                 //deactivate after 3 seconds
-                StartCoroutine(PickupActive());
+                StartCoroutine(DisablePickupAfterSeconds(5));
             }
 
-            if (other.gameObject.CompareTag("shootPickUp"))
+            if (other.gameObject.CompareTag("gunPickUp"))
             {
-                other.gameObject.SetActive(false); //deactivate cube
+                other.gameObject.SetActive(false); //deactivate the pickup icon
 
                 //activate gun
-                shootActive = true;
-
+                EquipGun(); //equip gun
+                
                 //deactivate after 3 seconds
-                StartCoroutine(PickupActive());
+                StartCoroutine(DisablePickupAfterSeconds(2));
             }
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
@@ -191,23 +192,26 @@ public class CarController : MonoBehaviour
                 other.gameObject.SetActive(false); //deactivate cube
 
                 //activate throw object
-                throwActive = true;
+                EquipThrow();
 
-                //deactivate after 3 seconds
-                StartCoroutine(PickupActive());
             }
         }
     }
 
-    IEnumerator PickupActive()
+
+
+    //resets booleans and disables pickup after three seconds
+    IEnumerator DisablePickupAfterSeconds(int seconds)
     {
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(3);
+        //yield on a new YieldInstruction that waits for 3 seconds.
+        yield return new WaitForSeconds(seconds);
 
-        shootActive = false;
-        throwActive = false;
-        shieldActive = false;
-
+        if(gunActive){
+            RemoveGun();
+        }
+        if(shieldActive){
+            RemoveShield();
+        }
     }
 
 
@@ -265,10 +269,46 @@ public class CarController : MonoBehaviour
         gunObject.transform.rotation = gunPoint.transform.rotation;
         gunObject.transform.parent = transform;
         gunScript = gunObject.GetComponent<GunController>();
-        gunIsEquipped = true;
+        gunActive = true;
     }
 
+    private void RemoveGun()
+    {
+        Destroy(gunObject);
+        gunScript = null;
+        gunActive = false;
 
+    }
+
+    //shield
+    private void EquipShield()
+    {
+        shield = Instantiate(Resources.Load(shieldGameObjectName, typeof(GameObject))) as GameObject;
+        shield.transform.position = shieldPoint.transform.position;
+        shield.transform.rotation = shieldPoint.transform.rotation;
+        shieldScript = shield.GetComponent<ShieldController>();
+        shield.transform.parent = transform;
+        shieldActive = true;
+    }
+
+    private void RemoveShield()
+    {
+        Destroy(shield);
+        shieldActive = false;
+    }
+
+    private void EquipThrow(){
+        throwActive = true;
+    }
+
+    // called after thrown
+    private void RemoveThrow(){
+        throwActive = false;
+    }
+
+    public void AddPoint(){
+        score = score + 1;
+    }
 
     // customization
     private void WearHat(){
