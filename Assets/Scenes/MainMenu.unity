@@ -763,8 +763,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Super Shmur Bros
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e976f25bc42bf3d4782d8e5545baa674, type: 2}
-  m_sharedMaterial: {fileID: -808929104003413495, guid: e976f25bc42bf3d4782d8e5545baa674, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 713c9eda6bc98944f8545496a4ccb1bc, type: 2}
+  m_sharedMaterial: {fileID: 8284172686851309195, guid: 713c9eda6bc98944f8545496a4ccb1bc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
