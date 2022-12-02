@@ -9,6 +9,8 @@ TagManager:
   - MenuMusic
   - PauseMusic
   - GameMusic
+  - gunPickUp
+  - bullet
   layers:
   - Default
   - TransparentFX

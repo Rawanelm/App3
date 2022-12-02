@@ -15,4 +15,8 @@ public class GunController : MonoBehaviour
     {
         
     }
+
+    public void ShootGun(){
+        print("pew");
+    }
 }
