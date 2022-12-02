@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class GameManager : MonoBehaviour
 
     public string gameOverScene;
 
+    public float timeLeft = 120;
+    private int timeLeftInt;
+    public TextMeshProUGUI timerText;
+
     // Start is called before the first frame update
     void Start()
     {
         car1Script = car1.GetComponent<CarController>();
         car2Script = car2.GetComponent<CarController>();
+        PlayMusic();
     }
 
     // Update is called once per frame
@@ -28,6 +34,14 @@ public class GameManager : MonoBehaviour
     {
         MonitorCar(car1);
         MonitorCar(car2);
+
+        timeLeft -= Time.deltaTime;
+        timeLeftInt = (int)timeLeft;
+        timerText.text = "timer: " + timeLeftInt.ToString();
+        if ( timeLeft < 0 )
+        {
+            EndGame();
+        }
     }
 
     void MonitorCar(GameObject car){
@@ -35,7 +49,6 @@ public class GameManager : MonoBehaviour
             if(car1Script.health <= 0){
                 Respawn(car1, car1Script, car1SpawnPoint);
                 car2Script.AddPoint();
-
             }
         }
         if(car == car2){
