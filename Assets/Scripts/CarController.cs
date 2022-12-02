@@ -83,6 +83,7 @@ public class CarController : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = Vector3.down;
 
         healthText = healthTextGameObject.GetComponent<TextMeshPro>();
         scoreText = scoreTextGameObject.GetComponent<TextMeshPro>();
