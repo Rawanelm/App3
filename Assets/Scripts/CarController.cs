@@ -41,16 +41,12 @@ public class CarController : MonoBehaviour
 
     // health stuff
     [SerializeField] public int health = 100;
-    private TextMeshPro healthText;
-    [SerializeField] private GameObject healthTextGameObject;
 
     // camera stuff
     [SerializeField] private Camera cameraComponent;
 
     //score stuff
     public int score = 0;
-    private TextMeshPro scoreText;
-    [SerializeField] private GameObject scoreTextGameObject;
 
     // hats
     private string hatName;
@@ -84,9 +80,6 @@ public class CarController : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = Vector3.down;
-
-        healthText = healthTextGameObject.GetComponent<TextMeshPro>();
-        scoreText = scoreTextGameObject.GetComponent<TextMeshPro>();
 
         PlayerSettings();
         WearHat();
@@ -123,8 +116,6 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        healthText.text = $"{health}";
-        scoreText.text = $"{score}";
         GetUsePickUpInput();
         GetDrivingInput();
         HandleMotor();
