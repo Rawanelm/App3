@@ -28,19 +28,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //MonitorCar(car1);
-        //MonitorCar(car2);
+        MonitorCar(car1);
+        MonitorCar(car2);
     }
 
     void MonitorCar(GameObject car){
         if(car == car1){
-            if(car1Script.HEALTH <= 0){
+            if(car1Script.health <= 0){
                 Respawn(car1, car1Script, car1SpawnPoint);
+                car2Script.AddPoint();
+
             }
         }
         if(car == car2){
-            if(car2Script.HEALTH <= 0){
+            if(car2Script.health <= 0){
                 Respawn(car2, car2Script, car2SpawnPoint);
+                car1Script.AddPoint();
             }
         }
 
@@ -48,8 +51,10 @@ public class GameManager : MonoBehaviour
 
     void Respawn(GameObject car, CarController carScript, GameObject spawnPoint){
         car.transform.position = spawnPoint.transform.position;
-        carScript.HEALTH = 100;
+        carScript.health = 100;
     }
+
+
 
     public void EndGame()
     {
