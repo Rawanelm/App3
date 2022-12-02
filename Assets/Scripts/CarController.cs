@@ -52,6 +52,17 @@ public class CarController : MonoBehaviour
     private GameObject hat;
     public GameObject hatPoint;
 
+    // pickups
+    private UnityEngine.KeyCode USE_PICKUP;
+
+    // gun
+    private bool gunIsEquipped;
+    private string gunGameObjectName = "PickupItems/gun";
+    private GameObject gunObject;
+    private GunController gunScript;
+    public GameObject gunPoint;
+
+
     // rigid body
     Rigidbody rb;
 
@@ -61,23 +72,7 @@ public class CarController : MonoBehaviour
         healthBar = healthBarGameObject.GetComponent<TextMeshPro>();
 
         PlayerSettings();
-
         WearHat();
-        
-        
-    }
-
-    private void OnCollisionEnter(Collision other) {
-    
-    }
-
-    private void WearHat(){
-        if(hatName != ""){
-            hat = Instantiate(Resources.Load(hatName, typeof(GameObject))) as GameObject;
-            hat.transform.position = hatPoint.transform.position;
-            hat.transform.parent = transform;
-
-        }
     }
 
     private void PlayerSettings(){
@@ -86,10 +81,11 @@ public class CarController : MonoBehaviour
         RIGHT = KeyCode.D;
         LEFT = KeyCode.A;
         BACK = KeyCode.S;
+        USE_PICKUP = KeyCode.Q;
 
         cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
 
-        hatName = "MagicianHat";
+        hatName = "Hats/MagicianHat";
         // TODO: uncomment
         //hatName = PlayerPrefs.GetString("player1hat");
       }
@@ -98,13 +94,37 @@ public class CarController : MonoBehaviour
         RIGHT = KeyCode.RightArrow;
         LEFT = KeyCode.LeftArrow;
         BACK = KeyCode.DownArrow;
+        USE_PICKUP = KeyCode.RightShift;
 
         cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraComponent.GetComponent<AudioListener>().enabled = false ;
-        hatName = "CowboyHat";
+        hatName = "Hats/CowboyHat";
         // TODO: uncomment
         //hatName = PlayerPrefs.GetString("player2hat");
       }
+    }
+
+    private void FixedUpdate()
+    {
+        healthBar.text = $"{HEALTH}";
+        GetUsePickUpInput();
+        GetDrivingInput();
+        HandleMotor();
+        HandleSteering();
+        UpdateWheels();
+    }
+
+
+    private void OnCollisionEnter(Collision other) {
+    
+    }
+
+
+
+    private void GetUsePickUpInput(){
+        if (Input.GetKey(USE_PICKUP) && gunIsEquipped){
+            gunScript.ShootGun();
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -115,6 +135,10 @@ public class CarController : MonoBehaviour
             //do not decrease health index
             //do not pick up anything else
         }
+        if (other.gameObject.tag == "gunPickUp"){
+            other.gameObject.SetActive(false);
+            EquipGun();
+        }  
         else if(shootActive || throwActive) //check if any weapons are already active
         {
             //do not pick anything
@@ -187,16 +211,7 @@ public class CarController : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
-    {
-        healthBar.text = $"{HEALTH}";
-        GetInput();
-        HandleMotor();
-        HandleSteering();
-        UpdateWheels();
-    }
-
-    private void GetInput()
+    private void GetDrivingInput()
     {
         float forwardComponent = 0;
         float backwardComponent = 0;
@@ -242,6 +257,31 @@ public class CarController : MonoBehaviour
         }
     }
 
+
+    // pickups
+    private void EquipGun(){
+        gunObject = Instantiate(Resources.Load(gunGameObjectName, typeof(GameObject))) as GameObject;
+        gunObject.transform.position = gunPoint.transform.position;
+        gunObject.transform.rotation = gunPoint.transform.rotation;
+        gunObject.transform.parent = transform;
+        gunScript = gunObject.GetComponent<GunController>();
+        gunIsEquipped = true;
+    }
+
+
+
+    // customization
+    private void WearHat(){
+        if(hatName != ""){
+            hat = Instantiate(Resources.Load(hatName, typeof(GameObject))) as GameObject;
+            hat.transform.position = hatPoint.transform.position;
+            hat.transform.rotation = hatPoint.transform.rotation;
+            hat.transform.parent = transform;
+        }
+    }
+
+
+    // driving helper functions
     private void HandleMotor()
     {
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
