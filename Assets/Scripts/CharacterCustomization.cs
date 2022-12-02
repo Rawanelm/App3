@@ -31,9 +31,9 @@ public class CharacterCustomization : MonoBehaviour
     public void BeginGame()
     {
         P1name = playerOneName.GetComponent<TMP_InputField>().text;
-        PlayerPrefs.SetString("playerName", P1name);
+        PlayerPrefs.SetString("P1name", P1name);
         P2name = playerTwoName.GetComponent<TMP_InputField>().text;
-        PlayerPrefs.SetString("playerName", P2name);
+        PlayerPrefs.SetString("P2name", P2name);
 
         GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
         SceneManager.LoadScene(gameScene);

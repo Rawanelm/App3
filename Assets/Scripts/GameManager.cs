@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject car1SpawnPoint;
     public GameObject car2SpawnPoint;
 
+    public string gameOverScene;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +28,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MonitorCar(car1);
-        MonitorCar(car2);
+        //MonitorCar(car1);
+        //MonitorCar(car2);
     }
 
     void MonitorCar(GameObject car){
@@ -47,5 +49,10 @@ public class GameManager : MonoBehaviour
     void Respawn(GameObject car, CarController carScript, GameObject spawnPoint){
         car.transform.position = spawnPoint.transform.position;
         carScript.HEALTH = 100;
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene(gameOverScene);
     }
 }

@@ -2660,6 +2660,8 @@ MonoBehaviour:
   fieldCheck: 0
   continueButton: {fileID: 1644970981}
   gameScene: GameScene
+  P1name: 
+  P2name: 
 --- !u!1 &1724972182
 GameObject:
   m_ObjectHideFlags: 0
