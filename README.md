@@ -10,7 +10,7 @@ Controls:
 
 2. Player 2:
   - arrows for movement
-  - space bar for shooting and throwing
+  - press right shift for shooting and throwing
 
 Menus:
 
@@ -20,6 +20,7 @@ Menus:
   - begin game
 
 3. Pause menu
+  - press space bar to access pause menu
   - Enable/Disable sounds
   - Exit game
 
