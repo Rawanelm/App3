@@ -24,4 +24,9 @@ Menus:
   - Enable/Disable sounds
   - Exit game
 
- 
+ Asset sources:
+ - Cartoon Racetrack: https://assetstore.unity.com/packages/3d/environments/roadways/cartoon-race-track-oval-175061. This was used for the enviroment setup. Graphics and colliders were changed to suit our requirments.
+ - Car: https://assetstore.unity.com/packages/3d/vehicles/land/arcade-free-racing-car-161085. Only the car itself was used.
+ - Car movement tutorial: (insert link here) . Tutorial was adjusted to suit our map and requirements.
+ - Sounds: https://assetstore.unity.com/packages/audio/sound-fx/ui-sounds-232561 (pickup sound effects). https://assetstore.unity.com/packages/audio/music/free-music-tracks-for-games-156413 (background music). https://assetstore.unity.com/packages/2d/gui/buttons-set-211824 (button sounds)
+ - Other: gun prefab, hat prefabs.
