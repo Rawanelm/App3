@@ -211,16 +211,6 @@ public class CarController : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
-    {
-        healthBar.text = $"{HEALTH}";
-        GetInput();
-        HandleMotor();
-        HandleSteering();
-        UpdateWheels();
-    }
-
-
     private void GetDrivingInput()
     {
         float forwardComponent = 0;
