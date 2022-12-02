@@ -86,6 +86,8 @@ public class CarController : MonoBehaviour
         cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
 
         hatName = "MagicianHat";
+        // TODO: uncomment
+        //hatName = PlayerPrefs.GetString("player1hat");
       }
       else if (playerNumber == 2){
         FORWARD = KeyCode.UpArrow;
@@ -96,6 +98,8 @@ public class CarController : MonoBehaviour
         cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraComponent.GetComponent<AudioListener>().enabled = false ;
         hatName = "CowboyHat";
+        // TODO: uncomment
+        //hatName = PlayerPrefs.GetString("player2hat");
       }
     }
 
