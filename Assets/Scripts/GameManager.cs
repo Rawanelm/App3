@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     {
         car1Script = car1.GetComponent<CarController>();
         car2Script = car2.GetComponent<CarController>();
-        //GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().PlayMusic();
     }
 
     // Update is called once per frame
@@ -48,6 +47,11 @@ public class GameManager : MonoBehaviour
     void Respawn(GameObject car, CarController carScript, GameObject spawnPoint){
         car.transform.position = spawnPoint.transform.position;
         carScript.HEALTH = 100;
+    }
+
+    public void PlayMusic()
+    {
+        GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().PlayMusic();
     }
 
     public void EndGame()
