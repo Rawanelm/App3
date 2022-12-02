@@ -6,9 +6,15 @@ TagManager:
   tags:
   - player1
   - player2
+  - shootPickUp
+  - ShieldPickUp
+  - ThrowPickUp
+  - Shield
   - MenuMusic
   - PauseMusic
   - GameMusic
+  - gunPickUp
+  - bullet
   layers:
   - Default
   - TransparentFX

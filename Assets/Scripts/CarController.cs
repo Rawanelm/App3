@@ -15,6 +15,10 @@ public class CarController : MonoBehaviour
     private float currentbreakForce;
     private bool isBreaking;
 
+    private bool shieldActive = false;
+    private bool shootActive = false;
+    private bool throwActive = false;
+
     [SerializeField] private float playerNumber = 1;
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
@@ -48,6 +52,17 @@ public class CarController : MonoBehaviour
     private GameObject hat;
     public GameObject hatPoint;
 
+    // pickups
+    private UnityEngine.KeyCode USE_PICKUP;
+
+    // gun
+    private bool gunIsEquipped;
+    private string gunGameObjectName = "PickupItems/gun";
+    private GameObject gunObject;
+    private GunController gunScript;
+    public GameObject gunPoint;
+
+
     // rigid body
     Rigidbody rb;
 
@@ -57,23 +72,7 @@ public class CarController : MonoBehaviour
         healthBar = healthBarGameObject.GetComponent<TextMeshPro>();
 
         PlayerSettings();
-
         WearHat();
-        
-        
-    }
-
-    private void OnCollisionEnter(Collision other) {
-    
-    }
-
-    private void WearHat(){
-        if(hatName != ""){
-            hat = Instantiate(Resources.Load(hatName, typeof(GameObject))) as GameObject;
-            hat.transform.position = hatPoint.transform.position;
-            hat.transform.parent = transform;
-
-        }
     }
 
     private void PlayerSettings(){
@@ -82,10 +81,11 @@ public class CarController : MonoBehaviour
         RIGHT = KeyCode.D;
         LEFT = KeyCode.A;
         BACK = KeyCode.S;
+        USE_PICKUP = KeyCode.Q;
 
         cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
 
-        hatName = "MagicianHat";
+        hatName = "Hats/MagicianHat";
         // TODO: uncomment
         //hatName = PlayerPrefs.GetString("player1hat");
       }
@@ -94,34 +94,124 @@ public class CarController : MonoBehaviour
         RIGHT = KeyCode.RightArrow;
         LEFT = KeyCode.LeftArrow;
         BACK = KeyCode.DownArrow;
+        USE_PICKUP = KeyCode.RightShift;
 
         cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraComponent.GetComponent<AudioListener>().enabled = false ;
-        hatName = "CowboyHat";
+        hatName = "Hats/CowboyHat";
         // TODO: uncomment
         //hatName = PlayerPrefs.GetString("player2hat");
       }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        print("from "+ $"{playerNumber}" + $"{other.gameObject.name}");
-        if (other.gameObject.name == "FrontCollider"){
-            HEALTH = HEALTH - 50;
-        }
-
-        
-    }
-
     private void FixedUpdate()
     {
         healthBar.text = $"{HEALTH}";
-        GetInput();
+        GetUsePickUpInput();
+        GetDrivingInput();
         HandleMotor();
         HandleSteering();
         UpdateWheels();
     }
 
-    private void GetInput()
+
+    private void OnCollisionEnter(Collision other) {
+    
+    }
+
+
+
+    private void GetUsePickUpInput(){
+        if (Input.GetKey(USE_PICKUP) && gunIsEquipped){
+            gunScript.ShootGun();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+
+
+        //checks for shield
+        if (shieldActive) {
+            //do not decrease health index
+            //do not pick up anything else
+        }
+        if (other.gameObject.tag == "gunPickUp"){
+            other.gameObject.SetActive(false);
+            EquipGun();
+        }  
+        else if(shootActive || throwActive) //check if any weapons are already active
+        {
+            //do not pick anything
+            //RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
+            print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
+            if (other.gameObject.name == "FrontCollider")
+            {
+                HEALTH = HEALTH - 10;
+            }
+            // print(otherRB.velocity.magnitude);
+            // HEALTH = HEALTH - 1;
+        }
+        else if (!shootActive && !throwActive && !shieldActive)
+        {
+
+            // RigidBody tag = other.gameObject.GetComponent<Rigidbody>();
+            print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
+            if (other.gameObject.name == "FrontCollider")
+            {
+                HEALTH = HEALTH - 10;
+            }
+            // print(otherRB.velocity.magnitude);
+            // HEALTH = HEALTH - 1;
+
+            //activates pickups based on tag 
+            if (other.gameObject.CompareTag("ShieldPickUp"))
+            {
+                other.gameObject.SetActive(false); //deavtivates the cube
+
+                //activate the shield
+                shieldActive = true;
+
+                //deactivate after 3 seconds
+                StartCoroutine(PickupActive());
+            }
+
+            if (other.gameObject.CompareTag("shootPickUp"))
+            {
+                other.gameObject.SetActive(false); //deactivate cube
+
+                //activate gun
+                shootActive = true;
+
+                //deactivate after 3 seconds
+                StartCoroutine(PickupActive());
+            }
+
+            if (other.gameObject.CompareTag("ThrowPickUp"))
+            {
+                other.gameObject.SetActive(false); //deactivate cube
+
+                //activate throw object
+                throwActive = true;
+
+                //deactivate after 3 seconds
+                StartCoroutine(PickupActive());
+            }
+        }
+    }
+
+    IEnumerator PickupActive()
+    {
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(3);
+
+        shootActive = false;
+        throwActive = false;
+        shieldActive = false;
+
+    }
+
+
+    private void GetDrivingInput()
     {
         float forwardComponent = 0;
         float backwardComponent = 0;
@@ -167,6 +257,31 @@ public class CarController : MonoBehaviour
         }
     }
 
+
+    // pickups
+    private void EquipGun(){
+        gunObject = Instantiate(Resources.Load(gunGameObjectName, typeof(GameObject))) as GameObject;
+        gunObject.transform.position = gunPoint.transform.position;
+        gunObject.transform.rotation = gunPoint.transform.rotation;
+        gunObject.transform.parent = transform;
+        gunScript = gunObject.GetComponent<GunController>();
+        gunIsEquipped = true;
+    }
+
+
+
+    // customization
+    private void WearHat(){
+        if(hatName != ""){
+            hat = Instantiate(Resources.Load(hatName, typeof(GameObject))) as GameObject;
+            hat.transform.position = hatPoint.transform.position;
+            hat.transform.rotation = hatPoint.transform.rotation;
+            hat.transform.parent = transform;
+        }
+    }
+
+
+    // driving helper functions
     private void HandleMotor()
     {
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
