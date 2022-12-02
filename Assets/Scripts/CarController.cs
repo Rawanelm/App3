@@ -129,7 +129,10 @@ public class CarController : MonoBehaviour
 
 
     private void OnCollisionEnter(Collision other) {
-    
+     if (other.gameObject.tag == "bullet")
+        {
+            health = health - 1;
+        }
     }
 
 
@@ -173,7 +176,7 @@ public class CarController : MonoBehaviour
                 EquipShield();
 
                 //deactivate after 3 seconds
-                StartCoroutine(DisablePickupAfterSeconds(5));
+                StartCoroutine(DisablePickupAfterSeconds(1000));
             }
 
             if (other.gameObject.CompareTag("gunPickUp"))
@@ -184,7 +187,7 @@ public class CarController : MonoBehaviour
                 EquipGun(); //equip gun
                 
                 //deactivate after 3 seconds
-                StartCoroutine(DisablePickupAfterSeconds(2));
+                StartCoroutine(DisablePickupAfterSeconds(1000));
             }
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
