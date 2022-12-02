@@ -9,7 +9,6 @@ public class PauseMenu : MonoBehaviour
     public string mainMenu;
     public GameObject pauseMenu;
     public bool isPaused;
-    public string settingsScene;
 
     void Update()
     {
@@ -37,12 +36,6 @@ public class PauseMenu : MonoBehaviour
     public void ToMain()
     {
         SceneManager.LoadScene(mainMenu);
-    }
-
-    public void Settings()
-    {
-        GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
-        SceneManager.LoadScene(settingsScene);
     }
 
     public void QuitGame()

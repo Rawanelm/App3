@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour
 {
     public string characterScene;
-    public string settingsScene;
     public string gameScene;
 
     void Start()
@@ -27,13 +26,4 @@ public class MenuController : MonoBehaviour
         Application.Quit();
         Debug.Log("Quitting");
     }
-
-    public void Settings()
-    {
-        GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
-        SceneManager.LoadScene(settingsScene);
-    }
-
-    
-
 }

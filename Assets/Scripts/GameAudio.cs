@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class AudioController : MonoBehaviour
+public class GameAudio : MonoBehaviour
 {
     private AudioSource audioSource;
 
@@ -13,8 +12,8 @@ public class AudioController : MonoBehaviour
 
     void Start()
     {
-        go = GameObject.FindGameObjectsWithTag("MenuMusic");
-
+        go = GameObject.FindGameObjectsWithTag("GameMusic");
+        
         foreach (GameObject thing in go)
         {
             if (thing.scene.buildIndex == -1)
@@ -31,17 +30,17 @@ public class AudioController : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         audioSource = GetComponent<AudioSource>();
     }
-    
+
     void FixedUpdate()
     {
         volumeValue = PlayerPrefs.GetFloat("Volume");
         audioSource.volume = volumeValue;
         //Debug.Log(volumeValue);
     }
-    
+
     public void PlayMusic()
     {
-        if (audioSource.isPlaying) return;
+        //if (audioSource.isPlaying) return;
         audioSource.Play();
     }
 

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public GameObject car1;
     public GameObject car2;
 
@@ -22,7 +21,6 @@ public class GameManager : MonoBehaviour
     {
         car1Script = car1.GetComponent<CarController>();
         car2Script = car2.GetComponent<CarController>();
-
     }
 
     // Update is called once per frame
@@ -55,9 +53,14 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void PlayMusic()
+    {
+        GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().PlayMusic();
+    }
 
     public void EndGame()
     {
+        GameObject.FindGameObjectWithTag("GameMusic").GetComponent<GameAudio>().StopMusic();
         SceneManager.LoadScene(gameOverScene);
     }
 }

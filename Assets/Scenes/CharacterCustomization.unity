@@ -2642,7 +2642,6 @@ MonoBehaviour:
   mainMenu: MainMenu
   pauseMenu: {fileID: 205040365}
   isPaused: 0
-  settingsScene: Settings
 --- !u!114 &1671369746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3520,5 +3519,23 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 699416480180063937, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+--- !u!1 &916836363717325343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 146208888758989206, guid: af5862936cf3aa9458f06214dbcd7847, type: 3}
+  m_PrefabInstance: {fileID: 916836363717325342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &916836363717325344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916836363717325343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0598a8b704adba540ba5bc52860fd1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
