@@ -9,8 +9,10 @@ public class CharacterCustomization : MonoBehaviour
 {
     public TMP_InputField playerOneName;
     public TMP_InputField playerTwoName;
-    //public TMP_Text p1Selection;
-    //public TMP_Text p2Selection;
+    public TMP_Dropdown p1Drop;
+    public TMP_Dropdown p2Drop;
+    private TMP_Text p1Selection;
+    private TMP_Text p2Selection;
     public bool fieldCheck = false;
     public Button continueButton;
     public string gameScene;
@@ -39,18 +41,16 @@ public class CharacterCustomization : MonoBehaviour
         P2name = playerTwoName.GetComponent<TMP_InputField>().text;
         PlayerPrefs.SetString("P2name", P2name);
 
-        P1hat = "Cowboy Hat";
-            //p1Selection.GetComponent<TMP_Text>().ToString();
-        P2hat = "Crown";
-        
-        //p2Selection.GetComponent<TMP_Text>().ToString();
+        p1Selection = p1Drop.captionText;
+        P1hat = p1Selection.text;
 
-        Debug.Log(P1hat);
-        Debug.Log(P2hat);
+        p2Selection = p2Drop.captionText;
+        P2hat = p2Selection.text;
+
+ 
         PlayerOneCustom();
         PlayerTwoCustom();
-        print(PlayerPrefs.GetString("P1hat"));
-        print(PlayerPrefs.GetString("P2hat"));
+
 
         GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
         SceneManager.LoadScene(gameScene);
@@ -66,7 +66,7 @@ public class CharacterCustomization : MonoBehaviour
         {
             PlayerPrefs.SetString("P1hat", "Hats/Crown");
         }
-        else if (P2hat == "Magician Hat")
+        else if (P1hat == "Magician Hat")
         {
             PlayerPrefs.SetString("P1hat", "Hats/MagicianHat");
         }
