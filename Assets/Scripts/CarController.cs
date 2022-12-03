@@ -60,7 +60,13 @@ public class CarController : MonoBehaviour
     private string gunGameObjectName = "PickupItems/gun";
     private GameObject gunObject;
     private GunController gunScript;
-    public GameObject gunPoint;
+    public GameObject gunPoint; 
+
+    // throw (bomb)
+    private string throwModelGameObjectName = "PickupItems/bombModel";
+    private GameObject throwModelObject;
+    private BombModelController throwModelScript;
+    public GameObject throwPoint; 
 
     //booleans to check if any pickups are active
     private bool shieldActive = false;
@@ -136,6 +142,10 @@ public class CarController : MonoBehaviour
     private void GetUsePickUpInput(){
         if (Input.GetKey(USE_PICKUP) && gunActive){
             gunScript.ShootGun();
+        }
+        if (Input.GetKey(USE_PICKUP) && throwActive){
+            throwModelScript.Throw();
+            RemoveThrow();
         }
     }
 
@@ -301,11 +311,18 @@ public class CarController : MonoBehaviour
     }
 
     private void EquipThrow(){
+        throwModelObject = Instantiate(Resources.Load(throwModelGameObjectName, typeof(GameObject))) as GameObject;
+        throwModelObject.transform.position = throwPoint.transform.position;
+        throwModelObject.transform.rotation = throwPoint.transform.rotation;
+        throwModelScript = throwModelObject.GetComponent<BombModelController>();
+        throwModelObject.transform.parent = transform;
         throwActive = true;
     }
 
     // called after thrown
     private void RemoveThrow(){
+        Destroy(throwModelObject);
+        throwModelScript = null;
         throwActive = false;
     }
 

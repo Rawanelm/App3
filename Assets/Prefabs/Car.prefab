@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &118371186430064548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4409122935565862732}
+  m_Layer: 0
+  m_Name: ThrowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4409122935565862732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118371186430064548}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: 1.01, z: 3.98}
+  m_LocalScale: {x: 0.9999999, y: 1, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1727609405392725863}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186922356082526312
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +467,7 @@ Transform:
   - {fileID: 3337960571965731509}
   - {fileID: 4346504051383647012}
   - {fileID: 5768228746522059207}
+  - {fileID: 4409122935565862732}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -483,12 +515,11 @@ MonoBehaviour:
   gunPickupSound: {fileID: 8300000, guid: be2840cf7e4c00748853fedece5ff83c, type: 3}
   throwPickupSound: {fileID: 8300000, guid: ce9ab71ae50e88945b8501047aa1e79f, type: 3}
   health: 100
-  healthTextGameObject: {fileID: 0}
   cameraComponent: {fileID: 632106310928461306}
   score: 0
-  scoreTextGameObject: {fileID: 0}
   hatPoint: {fileID: 186922356082526312}
   gunPoint: {fileID: 1481599286135946614}
+  throwPoint: {fileID: 118371186430064548}
   shieldPoint: {fileID: 1816442470950753543}
 --- !u!1 &2158626270215602107
 GameObject:
@@ -969,14 +1000,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6656549218513557426}
-  m_LocalRotation: {x: 0.17110892, y: -0, z: -0, w: 0.9852522}
-  m_LocalPosition: {x: 0, y: 2.88, z: -5.12}
+  m_LocalRotation: {x: 0.058696214, y: 0.000000029802319, z: -0.000000029802319, w: 0.99827594}
+  m_LocalPosition: {x: 0, y: 3.27, z: -6.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1727609405392725863}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 19.705, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.73, y: 0, z: 0}
 --- !u!20 &632106310928461306
 Camera:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ TagManager:
   - GameMusic
   - gunPickUp
   - bullet
+  - bomb
   layers:
   - Default
   - TransparentFX
