@@ -138,6 +138,10 @@ public class CarController : MonoBehaviour
             {
                 health = health - 1;
             }
+            if (other.gameObject.tag == "bomb")
+            {
+                health = health - 50;
+            }
         }
     }
 
@@ -154,12 +158,11 @@ public class CarController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
 
-        private void DetectBump(){
+        void DetectBump(){
             if (other.gameObject.name == "FrontCollider")
             {
-                health = health - 100;
+                health = health - 10;
             }
         }
 
@@ -171,7 +174,7 @@ public class CarController : MonoBehaviour
         else if(gunActive || throwActive) //check if any weapons are already active
         {
             //do not pick anything
-            DetectBump()
+            DetectBump();
         }
         else if (!gunActive && !throwActive && !shieldActive)
         {
@@ -188,7 +191,7 @@ public class CarController : MonoBehaviour
                 EquipShield();
 
                 //deactivate after 3 seconds
-                StartCoroutine(DisablePickupAfterSeconds(1000));
+                StartCoroutine(DisablePickupAfterSeconds(40));
             }
 
             if (other.gameObject.CompareTag("gunPickUp"))
@@ -201,7 +204,7 @@ public class CarController : MonoBehaviour
                 EquipGun(); //equip gun
                 
                 //deactivate after 3 seconds
-                StartCoroutine(DisablePickupAfterSeconds(1000));
+                StartCoroutine(DisablePickupAfterSeconds(400));
             }
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
