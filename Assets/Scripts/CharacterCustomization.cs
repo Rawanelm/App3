@@ -14,6 +14,8 @@ public class CharacterCustomization : MonoBehaviour
     public string gameScene;
     public string P1name = "";
     public string P2name = "";
+    public string cowboy = "";
+    public string crown = "";
 
     void Update()
     {
@@ -37,5 +39,13 @@ public class CharacterCustomization : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
         SceneManager.LoadScene(gameScene);
+    }
+
+    void PlayerOneCustom()
+    {
+        if(choose cowbow hat)
+        {
+            PlayerPrefs.SetString("P1hat", cowboy);
+        }
     }
 }
