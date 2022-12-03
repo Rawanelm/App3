@@ -626,6 +626,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 2109370173958941877, guid: b9c3db2335bbdba4f9459586e163af09, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f81f5a1d9f0bf294892d39c345a42558, type: 2}
+    - target: {fileID: 2109370173958941877, guid: b9c3db2335bbdba4f9459586e163af09, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8344179639718839653, guid: f81f5a1d9f0bf294892d39c345a42558, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c3db2335bbdba4f9459586e163af09, type: 3}
 --- !u!224 &903742742 stripped
@@ -761,8 +769,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SHMARIO KART BATTLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 713c9eda6bc98944f8545496a4ccb1bc, type: 2}
-  m_sharedMaterial: {fileID: 8284172686851309195, guid: 713c9eda6bc98944f8545496a4ccb1bc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f81f5a1d9f0bf294892d39c345a42558, type: 2}
+  m_sharedMaterial: {fileID: -8344179639718839653, guid: f81f5a1d9f0bf294892d39c345a42558, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1050,6 +1058,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1581132149}
     m_Modifications:
+    - target: {fileID: 3081413419007574340, guid: 73af04c4023956c47b9f823b5f9e388f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f81f5a1d9f0bf294892d39c345a42558, type: 2}
+    - target: {fileID: 3081413419007574340, guid: 73af04c4023956c47b9f823b5f9e388f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8344179639718839653, guid: f81f5a1d9f0bf294892d39c345a42558, type: 2}
     - target: {fileID: 3081413419703530896, guid: 73af04c4023956c47b9f823b5f9e388f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

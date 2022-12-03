@@ -101,7 +101,7 @@ public class CarController : MonoBehaviour
 
         cameraComponent.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
 
-        hatName = "Hats/MagicianHat";
+        hatName = PlayerPrefs.GetString("P1hat");
         // TODO: uncomment
         //hatName = PlayerPrefs.GetString("player1hat");
       }
@@ -114,7 +114,7 @@ public class CarController : MonoBehaviour
 
         cameraComponent.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraComponent.GetComponent<AudioListener>().enabled = false ;
-        hatName = "Hats/CowboyHat";
+        hatName = PlayerPrefs.GetString("P2hat");
         // TODO: uncomment
         //hatName = PlayerPrefs.GetString("player2hat");
       }
