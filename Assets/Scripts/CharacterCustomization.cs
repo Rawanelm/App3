@@ -49,6 +49,8 @@ public class CharacterCustomization : MonoBehaviour
         Debug.Log(P2hat);
         PlayerOneCustom();
         PlayerTwoCustom();
+        print(PlayerPrefs.GetString("P1hat"));
+        print(PlayerPrefs.GetString("P2hat"));
 
         GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioController>().StopMusic();
         SceneManager.LoadScene(gameScene);
@@ -60,11 +62,11 @@ public class CharacterCustomization : MonoBehaviour
         {
             PlayerPrefs.SetString("P1hat", "Hats/CowboyHat");
         }
-        if (P1hat == "Crown")
+        else if (P1hat == "Crown")
         {
             PlayerPrefs.SetString("P1hat", "Hats/Crown");
         }
-        else
+        else if (P2hat == "Magician Hat")
         {
             PlayerPrefs.SetString("P1hat", "Hats/MagicianHat");
         }
@@ -72,15 +74,15 @@ public class CharacterCustomization : MonoBehaviour
 
     void PlayerTwoCustom()
     {
-        if (P1hat == "Cowboy Hat")
+        if (P2hat == "Cowboy Hat")
         {
             PlayerPrefs.SetString("P2hat", "Hats/CowboyHat");
         }
-        if (P1hat == "Crown")
+        else if (P2hat == "Crown")
         {
             PlayerPrefs.SetString("P2hat", "Hats/Crown");
         }
-        else
+        else if (P2hat == "Magician Hat")
         {
             PlayerPrefs.SetString("P2hat", "Hats/MagicianHat");
         }
