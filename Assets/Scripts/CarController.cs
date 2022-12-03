@@ -41,16 +41,12 @@ public class CarController : MonoBehaviour
 
     // health stuff
     [SerializeField] public int health = 100;
-    private TextMeshPro healthText;
-    [SerializeField] private GameObject healthTextGameObject;
 
     // camera stuff
     [SerializeField] private Camera cameraComponent;
 
     //score stuff
     public int score = 0;
-    private TextMeshPro scoreText;
-    [SerializeField] private GameObject scoreTextGameObject;
 
     // hats
     private string hatName;
@@ -64,7 +60,13 @@ public class CarController : MonoBehaviour
     private string gunGameObjectName = "PickupItems/gun";
     private GameObject gunObject;
     private GunController gunScript;
-    public GameObject gunPoint;
+    public GameObject gunPoint; 
+
+    // throw (bomb)
+    private string throwModelGameObjectName = "PickupItems/bombModel";
+    private GameObject throwModelObject;
+    private BombModelController throwModelScript;
+    public GameObject throwPoint; 
 
     //booleans to check if any pickups are active
     private bool shieldActive = false;
@@ -84,9 +86,6 @@ public class CarController : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = Vector3.down;
-
-        healthText = healthTextGameObject.GetComponent<TextMeshPro>();
-        scoreText = scoreTextGameObject.GetComponent<TextMeshPro>();
 
         PlayerSettings();
         WearHat();
@@ -123,8 +122,6 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        healthText.text = $"{health}";
-        scoreText.text = $"{score}";
         GetUsePickUpInput();
         GetDrivingInput();
         HandleMotor();
@@ -150,10 +147,21 @@ public class CarController : MonoBehaviour
         if (Input.GetKey(USE_PICKUP) && gunActive){
             gunScript.ShootGun();
         }
+        if (Input.GetKey(USE_PICKUP) && throwActive){
+            throwModelScript.Throw();
+            RemoveThrow();
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
         print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
+
+        private void DetectBump(){
+            if (other.gameObject.name == "FrontCollider")
+            {
+                health = health - 100;
+            }
+        }
 
         //checks for shield
         if (shieldActive) {
@@ -163,18 +171,11 @@ public class CarController : MonoBehaviour
         else if(gunActive || throwActive) //check if any weapons are already active
         {
             //do not pick anything
-            if (other.gameObject.name == "FrontCollider")
-            {
-                health = health - 100;
-            }
+            DetectBump()
         }
         else if (!gunActive && !throwActive && !shieldActive)
         {
-
-            if (other.gameObject.name == "FrontCollider")
-            {
-                health = health - 100;
-            }
+            DetectBump();
 
             //activates pickups based on tag 
             if (other.gameObject.CompareTag("ShieldPickUp"))
@@ -211,7 +212,6 @@ public class CarController : MonoBehaviour
 
                 //activate throw object
                 EquipThrow();
-
             }
         }
     }
@@ -278,6 +278,8 @@ public class CarController : MonoBehaviour
     }
 
 
+
+
     // pickups
     private void EquipGun(){
         gunObject = Instantiate(Resources.Load(gunGameObjectName, typeof(GameObject))) as GameObject;
@@ -314,11 +316,18 @@ public class CarController : MonoBehaviour
     }
 
     private void EquipThrow(){
+        throwModelObject = Instantiate(Resources.Load(throwModelGameObjectName, typeof(GameObject))) as GameObject;
+        throwModelObject.transform.position = throwPoint.transform.position;
+        throwModelObject.transform.rotation = throwPoint.transform.rotation;
+        throwModelScript = throwModelObject.GetComponent<BombModelController>();
+        throwModelObject.transform.parent = transform;
         throwActive = true;
     }
 
     // called after thrown
     private void RemoveThrow(){
+        Destroy(throwModelObject);
+        throwModelScript = null;
         throwActive = false;
     }
 
