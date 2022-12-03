@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public string gameOverScene;
 
-    public float timeLeft = 15;
+    public float timeLeft;
     private int timeLeftInt;
     public TextMeshProUGUI timerText;
 
