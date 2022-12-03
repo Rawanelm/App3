@@ -23,7 +23,7 @@ Each game lasts 2 minutes and the player with the most kills wins.
 ##### inspiration
 This game is a variation of smash karts (https://smashkarts.io/ ). 
 
-###Controls:
+### Controls:
 
 Player 1: (left screen)
   - MOVEMENT [ W A S D ]
@@ -33,7 +33,7 @@ Player 2: (right screen)
   - MOVEMENT [ arrow keys ]
   - USING PICKUP [ right shift ]
 
-###Menus:
+### Menus:
 
 1. Main menu:
   - select player names
@@ -45,7 +45,7 @@ Player 2: (right screen)
   - Enable/Disable sounds
   - Exit game
 
-###Asset sources:
+### Asset sources:
  - Cartoon Racetrack: https://assetstore.unity.com/packages/3d/environments/roadways/cartoon-race-track-oval-175061. This was used for the enviroment setup. Graphics and colliders were changed to suit our requirments.
  - Car: https://assetstore.unity.com/packages/3d/vehicles/land/arcade-free-racing-car-161085. Only the car itself was used.
  - Car movement tutorial: (https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=468s&ab_channel=GameDevChef) . Tutorial was adjusted to suit our map and requirements.
