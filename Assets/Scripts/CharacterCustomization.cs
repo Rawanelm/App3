@@ -15,8 +15,13 @@ public class CharacterCustomization : MonoBehaviour
     public string P1name = "";
     public string P2name = "";
 
+    public GameObject d1;
+    public GameObject d2;
+   
+
     void Update()
     {
+
         if (playerOneName.GetComponent<TMP_InputField>().text.Length > 0 && playerTwoName.GetComponent<TMP_InputField>().text.Length > 0)
         { 
             fieldCheck = true;
@@ -26,6 +31,8 @@ public class CharacterCustomization : MonoBehaviour
         {
             continueButton.interactable = true;
         }
+
+     
     }
 
     public void BeginGame()
