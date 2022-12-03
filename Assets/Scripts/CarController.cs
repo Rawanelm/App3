@@ -204,7 +204,7 @@ public class CarController : MonoBehaviour
                 EquipGun(); //equip gun
                 
                 //deactivate after 3 seconds
-                StartCoroutine(DisablePickupAfterSeconds(400));
+                StartCoroutine(DisablePickupAfterSeconds(40));
             }
 
             if (other.gameObject.CompareTag("ThrowPickUp"))
