@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI car1NotificationText;
     public TextMeshProUGUI car2NotificationText;
 
+    public GameObject NotifCard1;
+    public GameObject NotifCard2;
+
     public string gameOverScene;
 
     public float timeLeft = 15;
@@ -35,8 +38,10 @@ public class GameManager : MonoBehaviour
     {
         car1Script = car1.GetComponent<CarController>();
         car2Script = car2.GetComponent<CarController>();
-        car2NotificationText.text = "";
-        car1NotificationText.text = "";
+        car2NotificationText.text = "find a pickup and click 'shift' to use!";
+        car1NotificationText.text = "find a pickup and click 'Q' to use!";
+        StartCoroutine(ClearNotification(car2NotificationText, NotifCard2));
+        StartCoroutine(ClearNotification(car1NotificationText, NotifCard1));
         PlayMusic();
     }
 
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
 
             if(car1Script.health <= 0){
                 Respawn(car1, car1Script, car1SpawnPoint);
-                StartCoroutine(DeathNotification(car1NotificationText));
+                StartCoroutine(DeathNotification(car1NotificationText, NotifCard1));
                 car2Script.AddPoint();
             }
         }
@@ -73,7 +78,7 @@ public class GameManager : MonoBehaviour
 
             if(car2Script.health <= 0){
                 Respawn(car2, car2Script, car2SpawnPoint);
-                StartCoroutine(DeathNotification(car2NotificationText));
+                StartCoroutine(DeathNotification(car2NotificationText, NotifCard2));
                 car1Script.AddPoint();
             }
         }
@@ -82,17 +87,30 @@ public class GameManager : MonoBehaviour
 
     void Respawn(GameObject car, CarController carScript, GameObject spawnPoint){
         car.transform.position = spawnPoint.transform.position;
+        car.transform.rotation = spawnPoint.transform.rotation;
         carScript.health = 100;
     }
 
-    IEnumerator DeathNotification(TextMeshProUGUI notificationText)
+    IEnumerator DeathNotification(TextMeshProUGUI notificationText, GameObject card)
     {
 
+        card.SetActive(true);
         notificationText.text = "YOU DIED";
         //yield on a new YieldInstruction that waits for 3 seconds.
         yield return new WaitForSeconds(3);
 
         notificationText.text = "";
+        card.SetActive(false);
+
+    }
+
+        IEnumerator ClearNotification(TextMeshProUGUI notificationText, GameObject card)
+    {
+        //yield on a new YieldInstruction that waits for 3 seconds.
+        yield return new WaitForSeconds(6);
+
+        notificationText.text = "";
+        card.SetActive(false);
 
     }
 

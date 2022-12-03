@@ -10,7 +10,6 @@ public class BombModelController : MonoBehaviour
 
 
     public void Throw(){
-        print("pew");
         bombObject = Instantiate(Resources.Load(bombGameObjectName, typeof(GameObject))) as GameObject;
         bombObject.transform.position = bombPoint.transform.position;
         bombObject.transform.rotation = bombPoint.transform.rotation;

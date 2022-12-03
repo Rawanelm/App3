@@ -158,7 +158,6 @@ public class CarController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
 
         void DetectBump(){
             if (other.gameObject.name == "FrontCollider")
