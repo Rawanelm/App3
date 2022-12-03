@@ -152,6 +152,13 @@ public class CarController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         print("from " + $"{playerNumber}" + $"{other.gameObject.name}");
 
+        private void DetectBump(){
+            if (other.gameObject.name == "FrontCollider")
+            {
+                health = health - 100;
+            }
+        }
+
         //checks for shield
         if (shieldActive) {
             //do not decrease health index
@@ -160,18 +167,11 @@ public class CarController : MonoBehaviour
         else if(gunActive || throwActive) //check if any weapons are already active
         {
             //do not pick anything
-            if (other.gameObject.name == "FrontCollider")
-            {
-                health = health - 100;
-            }
+            DetectBump()
         }
         else if (!gunActive && !throwActive && !shieldActive)
         {
-
-            if (other.gameObject.name == "FrontCollider")
-            {
-                health = health - 100;
-            }
+            DetectBump();
 
             //activates pickups based on tag 
             if (other.gameObject.CompareTag("ShieldPickUp"))
@@ -208,7 +208,6 @@ public class CarController : MonoBehaviour
 
                 //activate throw object
                 EquipThrow();
-
             }
         }
     }
@@ -273,6 +272,8 @@ public class CarController : MonoBehaviour
             isBreaking = false;
         }
     }
+
+
 
 
     // pickups
